@@ -1,0 +1,6 @@
+aiohttp
+discord.py
+feedparser
+python-dotenv
+pytz
+tinydb
