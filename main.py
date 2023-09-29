@@ -239,7 +239,7 @@ async def remove_feed(interaction: discord.Interaction, identifier: str):
 @app_commands.describe(channel = 'New channel for feed (without the @ symbol)')
 @app_commands.rename(identifier = 'feed')
 @app_commands.autocomplete(identifier = feeds_autocomplete)
-async def remove_feed(interaction: discord.Interaction, identifier: str, channel: discord.TextChannel):
+async def change_channel(interaction: discord.Interaction, identifier: str, channel: discord.TextChannel):
     try:
         print(identifier)
         feed_data = await get_feed_data_from_identifier(identifier)
@@ -277,7 +277,7 @@ async def get_feeds(interaction: discord.Interaction):
 @app_commands.describe(identifier = 'Feed to enable')
 @app_commands.rename(identifier = 'feed')
 @app_commands.autocomplete(identifier = feeds_autocomplete)
-async def get_last_post(interaction: discord.Interaction, identifier: str):
+async def enable_feed(interaction: discord.Interaction, identifier: str):
     try:
         await interaction.response.defer(thinking = True)
         feed_data = await get_feed_data_from_identifier(identifier)
@@ -295,7 +295,7 @@ async def get_last_post(interaction: discord.Interaction, identifier: str):
 @app_commands.describe(identifier = 'Feed to disable')
 @app_commands.rename(identifier = 'feed')
 @app_commands.autocomplete(identifier = feeds_autocomplete)
-async def get_last_post(interaction: discord.Interaction, identifier: str):
+async def disable_feed(interaction: discord.Interaction, identifier: str):
     try:
         await interaction.response.defer(thinking = True)
         feed_data = await get_feed_data_from_identifier(identifier)
@@ -362,9 +362,9 @@ async def get_last_post(interaction: discord.Interaction, feed: str):
         error_msg = await output_error_feed_not_found(feed)
         await interaction.followup.send(f'{error_msg}')
 
-# Update all feeds
+# Manually update all feeds
 @tree.command(name = 'update-all-feeds', description = 'Refresh all feeds in the server') #, guild = discord.Object(GUILD_ID))
-async def update_all_feeds(interaction: discord.Interaction):
+async def manually_update_all_feeds(interaction: discord.Interaction):
     try:
         message = ''
         successful_updates = []
